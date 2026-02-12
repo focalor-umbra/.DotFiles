@@ -1,0 +1,87 @@
+Run a command in a container or enter the container.
+    kexec optional: command
+See or follow the logs for a pod.
+    klogs optional:-f || --follow
+Find everything with (e.g. all resources on a node)
+    kfind regular expression 
+Find pods with regular expressions
+    kpfind
+
+contexts:
+    kcc                             kubectl config get-contexts
+
+core:
+    k                               kubectl
+    kd                              kubectl delete 
+    kds                             kubectl describe
+    ke                              kubectl edit
+    kg                              kubectl get
+    kga                             kubectl get --all-namespaces
+
+configmaps:
+    kcd                            kubectl delete configmaps
+    kcds                           kubectl describe configmaps
+    kce                            kubectl edit configmaps
+    kcg                            kubectl get configmaps
+    kcgy                           kubectl get configmaps -o wide
+    kcga                           kubectl get configmaps -o wide --all-namespaces
+
+deployments:
+    kdd                             kubectl delete deployments
+    kdds                            kubectl describe deployments
+    kde                             kubectl edit deployments
+    kdg                             kubectl get deployments 
+    kdgw                            watch kubectl get deployments
+    kdgy                            kubectl get deployments -o yaml
+    
+endpoints:
+    kepg                            kubectl get endpoints
+
+events:
+    kevg                            kubectl get events
+    
+horizontalpodautoscalers:
+    kghpa                           kubectl get horizontalpodautoscalers
+
+ingress:
+    kid                             kubectl delete ingress
+    kids                            kubectl describe ingress
+    kie                             kubectl edit ingress
+    kig                             kubectl get ingress
+    kigy                            kubectl get ingress -o yaml
+    
+namespaces:
+    knsd                            kubectl delete namespaces
+    knsds                           kubectl describe namespaces
+    knse                            kubectl edit namespaces
+    knsg                            kubectl get namespaces
+    knsgy                           kubectl get namespaces -o yaml
+
+nodes:
+    knds                            kubectl describe nodes
+    kne                             kubectl edit nodes
+    kng                             kubectl get nodes
+    kngy                            kubectl get nodes -o yaml
+    knt                             kubectl top nodes
+
+pods:
+    kpd                             kubectl delete pods
+    kpds                            kubectl describe pods
+    kpw                             kubectl edit pods
+    kpg                             kubectl get pods
+    kpgw                            watch kubectl get pods
+    kpgy                            kubectl get pods -o yaml
+    kpt                             kubectl top pods
+
+secrets:
+    kdssc                           kubectl describe secrets
+    ksce                            kubectl edit secrets
+    kscg                            kubectl get secrets
+    kscgy                           kubectl get secrets -o yaml
+
+services:
+    ksd                             kubectl delete service
+    ksds                            kubectl describe services
+    kse                             kubectl edit services
+    ksg                             kubectl get services
+    ksgy                            kubectl get services -o yaml

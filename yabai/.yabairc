@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+yabai -m signal --add event=window_focused action="sketchybar --trigger yabai_window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger yabai_window_created"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger yabai_window_destroyed"
+yabai -m signal --add event=space_changed action="sketchybar --trigger yabai_space_change"
+
+# Space 1: Terminals
+yabai -m rule --add app="^WezTerm$" space=1
+# Space 2: Development
+yabai -m rule --add app="^Code$" space=2 manage=on
+
+# Space 3: Communication
+yabai -m rule --add app="^Slack$" space=3
+yabai -m rule --add app="^Messages$" space=3

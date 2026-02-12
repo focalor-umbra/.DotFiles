@@ -1,0 +1,165 @@
+# ~/.config/starship.toml
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+palette = "catppuccin_mocha"
+
+format = """
+[┌─](fg:red)$os$directory$git_branch$git_status$fill$aws$elixir$gleam$golang$kubernetes$lua$nodejs$python$zig$time$battery
+[└─$character](red)
+"""
+
+continuation_prompt = ">"
+command_timeout = 500
+scan_timeout = 30
+
+[fill]
+symbol = "-"
+
+[aws]
+format = '[$symbol($profile )(\($region\) )]($style)'
+style = "base bg:#f9e2af"
+
+[battery]
+full_symbol = "󱊣"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+format = "[](fg:lavender)[$symbol$percentage]($style)[](fg:lavender)"
+
+[[battery.display]]
+threshold = 10
+style = "bg:lavender fg:base"
+
+[[battery.display]]
+threshold = 50
+style = "bg:lavender fg:base"
+
+[[battery.display]]
+threshold = 100
+style = "bg:lavender fg:base"
+
+[bun]
+format = '[](fg:sapphire)[ $version]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[character]
+success_symbol = "[>](green)"
+error_symbol = "[>](red)"
+
+[cmd_duration]
+format = "[ $duration]($style) "
+style = "base bg:#fab387"
+min_time = 500
+
+[directory]
+format = "[](fg:maroon)[ $path]($style)[](fg:maroon)"
+style = "bg:maroon fg:base"
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = true
+
+[elixir]
+format = '[](fg:sapphire)[ $version]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[git_branch]
+format = '[](fg:peach)[$branch(:$remote_branch)]($style)'
+style = "fg:base bg:peach"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style))[](fg:peach)'
+style = "fg:base bg:peach"
+ahead = "⇡"
+behind = "⇣"
+untracked = "?"
+modified = "!"
+staged = ""
+
+[gleam]
+format = '[](fg:sapphire)[ $version]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[golang]
+format = '[](fg:sapphire)[$symbol($version )($mod_version )]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[kubernetes]
+format = '[](fg:sapphire)[$context]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[line_break]
+disabled = false
+
+[lua]
+format = '[](fg:sapphire)[ $version]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[nodejs]
+format = "[](fg:sapphire)[󰎙 $version]($style)[](fg:sapphire)"
+style = "base bg:sapphire"
+
+[os]
+format = '[](fg:red)[$symbol]($style)[](fg:red)'
+style = "fg:base bg:red"
+disabled = false
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Arch = "󰣇 "
+Debian = " "
+Fedora = " "
+Kali = " "
+Linux = " "
+Macos = " "
+Mint = "󰣭 "
+NixOS = "󱄅 "
+Redhat = " "
+RedHatEnterprise = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+
+
+[python]
+format = '[](fg:sapphire)[ ${pyenv_prefix}(${version} )(")($virtualenv\) )]($style)[](fg:sapphire)'
+style = "fg:base bg:sapphire"
+
+[time]
+format = '[](fg:blue)[$time]($style)[](fg:blue)'
+use_12hr = false
+time_format = " %H:%M:%S "
+style = "fg:base bg:blue"
+disabled = false
+
+[zig]
+symbol = '⚡️ '
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
