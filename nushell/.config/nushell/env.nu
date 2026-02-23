@@ -7,13 +7,15 @@ $env.PNPM_HOME = $"($env.HOME)/Library/pnpm"
 $env.JAVA_HOME = (ls /opt/homebrew/Cellar/openjdk/*/libexec/openjdk.jdk/Contents/Home | get 0 | get name)
 $env.MAVEN_HOME = "/opt/homebrew/opt/maven"
 $env.RUSTUP = "/opt/homebrew/opt/rustup"
-
+$env.DOTNET_ROOT = $"($env.HOME)/.dotnet"
+$env.DOTNET_ENV = $"($env.DOTNET_ROOT)/tools"
 
 $env.KUBAZULO_PATH = "/opt/kubazulo"
 $env.SAML2AWS_PATH = "/opt/saml2aws"
 $env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
 $env.CARAPACE_LOG = 0
 $env.CARAPACE_TOOLTIP = 1
+$env.DOTNET_CLI_TELEMETRY_OPTOUT = 1
 
 $env.PATH = ($env.PATH | split row (char esep) | prepend [
     $env.adb
@@ -26,6 +28,8 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend [
     $env.RUSTUP
     $env.KUBAZULO_PATH
     $env.SAML2AWS_PATH
+    $env.DOTNET_ROOT
+    $env.DOTNET_ENV
 ])
 
 $env.STARSHIP_SHELL = "nu"
