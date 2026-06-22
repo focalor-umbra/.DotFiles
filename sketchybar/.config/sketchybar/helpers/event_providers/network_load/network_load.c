@@ -2,9 +2,11 @@
 #include "network.h"
 #include "../sketchybar.h"
 
-int main (int argc, char** argv) {
+int main(int argc, char **argv)
+{
   float update_freq;
-  if (argc < 4 || (sscanf(argv[3], "%f", &update_freq) != 1)) {
+  if (argc < 4 || (sscanf(argv[3], "%f", &update_freq) != 1))
+  {
     printf("Usage: %s \"<interface>\" \"<event-name>\" \"<event_freq>\"\n", argv[0]);
     exit(1);
   }
@@ -18,14 +20,15 @@ int main (int argc, char** argv) {
   struct network network;
   network_init(&network, argv[1]);
   char trigger_message[512];
-  for (;;) {
+  for (;;)
+  {
     // Acquire new info
     network_update(&network);
 
     // Prepare the event message
     snprintf(trigger_message,
              512,
-             "--trigger '%s' upload='%03d%s' download='%03d%s'",
+             "--trigger '%s' upload='%05.1f%s' download='%05.1f%s'",
              argv[2],
              network.up,
              unit_str[network.up_unit],

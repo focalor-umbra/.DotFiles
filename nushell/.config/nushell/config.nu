@@ -196,41 +196,36 @@ def --env load-nvm [] {
 }
 
 use ~/.config/nushell/themes/catppuccin-mocha.nu
-source ~/.cache/carapace/init.nu
-use ~/.cache/starship/init.nu
+
+if ("~/.cache/carapace/init.nu" | path exists) {
+    source ~/.cache/carapace/init.nu
+} else {
+    print "carapace init not found; re-run mac-bootstrap preflight to generate it"
+}
+
+if ("~/.cache/starship/init.nu" | path exists) {
+    use ~/.cache/starship/init.nu
+}
 
 $env.STARSHIP_SHELL = "nu"
 $env.TRANSIENT_PROMPT_COMMAND = "->"
 
-$env.config = {
-    show_banner: false
-    ls: {
-        use_ls_colors: true
-        clickable_links: true
-    }
-    rm: {
-        always_trash: true
-    }
-    table: {
-        mode: rounded
-        index_mode: always
-        trim: {
-            methodology: wrapping
-            wrapping_try_keep_words: true
-        }
-    }
-    history: {
-        max_size: 10000
-        sync_on_enter: true
-        file_format: "plaintext"
-    }
-    completions: {
-        case_sensitive: false
-        quick: true
-        partial: true
-        algorithm: "prefix"
-    }
-}
+# Update config keys without overwriting the whole record (preserves Carapace external completer).
+$env.config.show_banner = false
+$env.config.ls.use_ls_colors = true
+$env.config.ls.clickable_links = true
+$env.config.rm.always_trash = true
+$env.config.table.mode = "rounded"
+$env.config.table.index_mode = "always"
+$env.config.table.trim.methodology = "wrapping"
+$env.config.table.trim.wrapping_try_keep_words = true
+$env.config.history.max_size = 10000
+$env.config.history.sync_on_enter = true
+$env.config.history.file_format = "plaintext"
+$env.config.completions.case_sensitive = false
+$env.config.completions.quick = true
+$env.config.completions.partial = true
+$env.config.completions.algorithm = "prefix"
 
 def update [] {
     brew update
