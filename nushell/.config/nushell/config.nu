@@ -4,11 +4,9 @@
 # Helper functions
 ############################################
 def confirm_kubectl_delete [resource, name] {
-    let full_command = $"kubectl delete $resource $name"
-    print $"Are you sure you want to run: $full_command? (y/n): "
-    let response = (read)
+    let response = (input $"Are you sure you want to run: kubectl delete ($resource) ($name)? \(y/n\): ")
     if $response == "y" {
-        run $full_command
+        kubectl delete $resource $name
     } else {
         print "Command cancelled."
     }
@@ -66,8 +64,8 @@ def kpfind [pattern: string] {
     let matches = ($results | skip 1 | where { |line| $line =~ $pattern })
     
     if ($matches | length) > 0 {
-        echo $header
-        echo $matches | str
+        print $header
+        print ($matches | str join (char newline))
     }
 }
 
@@ -174,18 +172,17 @@ alias kscgy = kubectl get secrets -o yaml
 
 # Services
 alias ksg = kubectl get services
-alias kscg = kubectl get secrets
 def ksd [name] { confirm_kubectl_delete "services" $name }
 alias kse = kubectl edit services
 alias ksds = kubectl describe services
 alias ksgy = kubectl get services -o yaml
 
-def code [...args] {
-    let vscode_path = "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+def zed [...args] {
+    let zed_path = "/Applications/Zed.app/Contents/MacOS/cli"
     if ($args | is-empty) {
-        ^$vscode_path .
+        ^$zed_path .
     } else {
-        ^$vscode_path ...$args
+        ^$zed_path ...$args
     }
 }
 

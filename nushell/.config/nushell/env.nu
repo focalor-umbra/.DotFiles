@@ -18,10 +18,8 @@ if ($brew_path == null) {
 let brew_prefix = if ($env.BREW == "") { "" } else { ($env.BREW | path dirname) }
 
 $env.CARGO = $"($env.HOME)/.cargo/bin"
-$env.NVM_DIR = $"($env.HOME)/.nvm"
-$env.PNPM_HOME = $"($env.HOME)/Library/pnpm"
-
-# JAVA_HOME is best-effort (avoid breaking nushell startup if openjdk isn't installed).
+$env.DOTNET_ROOT = $"($env.HOME)/.dotnet"
+$env.DOTNET_ENV = $"($env.DOTNET_ROOT)/tools"
 $env.JAVA_HOME = (try {
     ls ($brew_prefix | path join "Cellar" "openjdk" "*" "libexec" "openjdk.jdk" "Contents" "Home")
     | get 0
@@ -31,12 +29,11 @@ $env.JAVA_HOME = (try {
 })
 
 $env.MAVEN_HOME = ($brew_prefix | path join "opt" "maven")
+$env.NVM_DIR = $"($env.HOME)/.nvm"
+$env.PIPX_BIN_DIR = $"($env.HOME)/.local/bin"
+$env.PNPM_HOME = $"($env.HOME)/Library/pnpm"
 $env.RUSTUP = ($brew_prefix | path join "opt" "rustup")
-$env.DOTNET_ROOT = $"($env.HOME)/.dotnet"
-$env.DOTNET_ENV = $"($env.DOTNET_ROOT)/tools"
 
-$env.KUBAZULO_PATH = "/opt/kubazulo"
-$env.SAML2AWS_PATH = "/opt/saml2aws"
 $env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
 $env.CARAPACE_LOG = 0
 $env.CARAPACE_TOOLTIP = 1
@@ -52,15 +49,14 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend [
     $env.adb
     $env.BREW
     $env.CARGO
-    $env.NVM_DIR
-    $env.PNPM_HOME
-    $env.JAVA_HOME
-    $env.MAVEN_HOME
-    $env.RUSTUP
-    $env.KUBAZULO_PATH
-    $env.SAML2AWS_PATH
     $env.DOTNET_ROOT
     $env.DOTNET_ENV
+    $env.JAVA_HOME
+    $env.MAVEN_HOME
+    $env.NVM_DIR
+    $env.PIPX_BIN_DIR
+    $env.PNPM_HOME    
+    $env.RUSTUP
 ])
 
 $env.STARSHIP_SHELL = "nu"
