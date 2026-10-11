@@ -77,6 +77,14 @@ let carapace_init = ($env.HOME | path join ".cache" "carapace" "init.nu")
 
 if (which carapace | is-empty) {
     print "carapace not found; skipping carapace init generation"
-} else if not ($carapace_init | path exists) {
-    carapace _carapace nushell | save -f $carapace_init
+} else {
+    let init = (carapace _carapace nushell)
+    # Carapace 1.5.x still emits the positional API deprecated in Nu 0.116.
+    let nu_version = (version | get version | split row "." | take 2 | each { into int })
+    let init = if ($nu_version.0 > 0 or $nu_version.1 >= 116) {
+        $init | str replace 'let carapace_completer = {|spans|' 'let carapace_completer = {|place| let spans = $place.command'
+    } else {
+        $init
+    }
+    $init | save -f $carapace_init
 }
