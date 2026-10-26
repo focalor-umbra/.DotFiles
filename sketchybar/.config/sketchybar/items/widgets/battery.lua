@@ -2,6 +2,8 @@ local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
 
+local text_font = { family = "Helvetica Neue", style = "Regular", size = 13 }
+
 local battery = sbar.add("item", "widgets.battery", {
     position = "right",
     icon = {
@@ -16,27 +18,25 @@ local battery = sbar.add("item", "widgets.battery", {
     },
     update_freq = 180,
     popup = {
-        align = "center",
-        drawing = "off"
+        align = "right", drawing = "off", height = 34, y_offset = 6,
+        background = {
+            drawing = true, color = colors.base, border_color = colors.surface2,
+            border_width = 1, corner_radius = 10, shadow = { drawing = true }
+        }
     }
 })
 
-local remaining_time = sbar.add("item", {
+local remaining_time = sbar.add("item", "battery.remaining", {
     position = "popup." .. battery.name,
+    width = 276, padding_left = 12, padding_right = 12,
+    background = { drawing = false },
     icon = {
-        string = "Time remaining:",
-        width = 100,
-        align = "left",
-        font = {
-            size = 15
-        },
-        color = colors.blue
+        string = "Time remaining", width = 120, align = "left",
+        font = text_font, color = colors.blue, padding_left = 0, padding_right = 0
     },
     label = {
-        string = "??:??h",
-        width = 100,
-        align = "right",
-        color = colors.blue
+        string = "No estimate", width = 156, align = "right",
+        font = text_font, color = colors.blue, padding_left = 0, padding_right = 0
     }
 })
 
@@ -95,8 +95,12 @@ local function battery_collapse_details()
     end
 end
 
-local function battery_expand_details()
+local function battery_expand_details(env)
+    if env.NAME and env.NAME ~= battery.name then return end
     if battery:query().popup.drawing == "off" then
+        sbar.set("widgets.volume1", { popup = { drawing = "off" } })
+        sbar.remove('/volume.device\\.*/')
+        sbar.set("wifi.wifi", { popup = { drawing = "off" } })
         battery:set({
             popup = {
                 drawing = "on"

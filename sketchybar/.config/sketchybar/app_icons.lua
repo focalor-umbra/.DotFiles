@@ -330,6 +330,7 @@ return {
     ["WeChat"] = ":wechat:",
     ["企业微信"] = ":wecom:",
     ["WeCom"] = ":wecom:",
+    ["wezterm-gui"] = ":wezterm:",
     ["WezTerm"] = ":wezterm:",
     ["WhatsApp"] = ":whats_app:",
     ["‎WhatsApp"] = ":whats_app:",
